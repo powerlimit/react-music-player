@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import Player from './components/Player/Player'
 import Song from './components/Song/Song'
 import {getMusic} from "./utils";
@@ -21,7 +21,7 @@ function App() {
         currentTime: 0,
         duration: 0,
     })
-    const [isLibraryOpen, setIsLibraryOpen] = useState(false);
+    const [isLibraryOpen, setIsLibraryOpen] = useState(true);
 
 
     const handleUpdateTime = (e: React.ChangeEvent<HTMLAudioElement>) => {
@@ -35,12 +35,6 @@ function App() {
         }
     }
 
-    useEffect(() => {
-        document.addEventListener('click', () => {
-            
-        })
-    }, [])
-
     return (
         <div className="App">
             <Nav
@@ -52,9 +46,12 @@ function App() {
                 audio={audio}
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
+                setSongs={setSongs}
                 song={currentSong}
                 setSongInfo={setSongInfo}
                 songInfo={songInfo}
+                setCurrentSong={setCurrentSong}
+                songs={songs}
             />
             <Library
                 setCurrentSong={setCurrentSong}

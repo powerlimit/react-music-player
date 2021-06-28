@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ISong from '../../types/Song'
 import Song from "../../types/Song";
+import useUpdateLibrary from '../../hooks/useUpdateLibrary';
 
 const Container = styled.div`
   display: flex;
@@ -41,12 +42,10 @@ interface IProps {
 
 const LibrarySong:React.FC<IProps> = ({setSongs, songs, isPlaying, song, setCurrentSong, audio}) => {
 
+    const {updateLibrary} = useUpdateLibrary()
     const handleSelectSong = () => {
         setCurrentSong(song)
-        const newSongs = songs.map(s => {
-            return {...s, active: s.id === song.id}
-        })
-        setSongs(newSongs)
+        updateLibrary(song, songs, setSongs)
         if (isPlaying) {
             audio.current!.play().then(a => {
                 audio.current!.play()
